@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WebApplication6.Models;
+using login2.Areas.Identity.Data;
 
 namespace WebApplication6.Data
 {
-    public class WebApplication6Context :IdentityDbContext<ApplicationUser>
+    public class WebApplication6Context :IdentityDbContext<login2.Areas.Identity.Data.ApplicationUser>
     {
         public WebApplication6Context (DbContextOptions<WebApplication6Context> options)
             : base(options)
@@ -27,13 +28,13 @@ namespace WebApplication6.Data
 
         public DbSet<WebApplication6.Models.Autovehicul> Autovehicul { get; set; }
     }
-}
 
-public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
-{
-    void IEntityTypeConfiguration<ApplicationUser>.Configure(EntityTypeBuilder<ApplicationUser> builder)
+    public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {
-        builder.Property(u => u.FirstName).HasMaxLength(255);
-        builder.Property(u => u.LastName).HasMaxLength(255);
+        void IEntityTypeConfiguration<ApplicationUser>.Configure(EntityTypeBuilder<ApplicationUser> builder)
+        {
+            builder.Property(u => u.FirstName).HasMaxLength(255);
+            builder.Property(u => u.LastName).HasMaxLength(255);
+        }
     }
 }

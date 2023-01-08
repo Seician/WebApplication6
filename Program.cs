@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using WebApplication6.Data;
 using Microsoft.EntityFrameworkCore;
+using login2.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<WebApplication6Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("WebApplication6Context") ?? throw new InvalidOperationException("Connection string 'WebApplication6Context' not found.")));
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<WebApplication6Context>();
 
 var app = builder.Build();
 
