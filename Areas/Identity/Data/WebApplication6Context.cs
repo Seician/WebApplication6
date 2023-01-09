@@ -27,6 +27,10 @@ namespace WebApplication6.Data
         public DbSet<WebApplication6.Models.Client> Client { get; set; } = default!;
 
         public DbSet<WebApplication6.Models.Autovehicul> Autovehicul { get; set; }
+
+        public DbSet<WebApplication6.Models.Angajat> Angajat { get; set; }
+
+        public DbSet<WebApplication6.Models.Operatiune> Operatiune { get; set; }
     }
 
     public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<ApplicationUser>

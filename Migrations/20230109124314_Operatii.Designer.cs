@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication6.Data;
 
@@ -11,9 +12,10 @@ using WebApplication6.Data;
 namespace WebApplication6.Migrations
 {
     [DbContext(typeof(WebApplication6Context))]
-    partial class WebApplication6ContextModelSnapshot : ModelSnapshot
+    [Migration("20230109124314_Operatii")]
+    partial class Operatii
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,35 +236,6 @@ namespace WebApplication6.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebApplication6.Models.Angajat", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Angajat");
-                });
-
             modelBuilder.Entity("WebApplication6.Models.Autovehicul", b =>
                 {
                     b.Property<int>("Id")
@@ -328,35 +301,6 @@ namespace WebApplication6.Migrations
                     b.ToTable("Client");
                 });
 
-            modelBuilder.Entity("WebApplication6.Models.Operatiune", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<int?>("AngajatID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("BookID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ClientID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ReturnDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("AngajatID");
-
-                    b.HasIndex("ClientID");
-
-                    b.ToTable("Operatiune");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -415,26 +359,6 @@ namespace WebApplication6.Migrations
                         .HasForeignKey("AutovehiculId");
 
                     b.Navigation("Autovehicul");
-                });
-
-            modelBuilder.Entity("WebApplication6.Models.Operatiune", b =>
-                {
-                    b.HasOne("WebApplication6.Models.Angajat", "Angajat")
-                        .WithMany("Operatiuni")
-                        .HasForeignKey("AngajatID");
-
-                    b.HasOne("WebApplication6.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientID");
-
-                    b.Navigation("Angajat");
-
-                    b.Navigation("Client");
-                });
-
-            modelBuilder.Entity("WebApplication6.Models.Angajat", b =>
-                {
-                    b.Navigation("Operatiuni");
                 });
 
             modelBuilder.Entity("WebApplication6.Models.Autovehicul", b =>
